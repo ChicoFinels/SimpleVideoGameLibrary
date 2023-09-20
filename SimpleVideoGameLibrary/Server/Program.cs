@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using SimpleVideoGameLibrary.Server.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+var dbpath = Path.Combine(Directory.GetCurrentDirectory(), "AppData");
+builder.Services.AddDbContext<DataContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection").Replace("[DataDirectory]", dbpath)));
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
