@@ -28,12 +28,16 @@ else
 		<InputNumber id="releaseYear" @bind-Value="game.ReleaseYear" class="form-control" />
 	</div><br />
 	<button type="submit" class="btn btn-primary">Save</button>
+	@if (Id is not null)
+	{
+		<button type="button" class="btn btn-danger" @onclick="DeleteVideoGame">Delete</button>
+	}
 </EditForm>
 
 @code {
 	[Parameter]
 	public int? Id { get; set; }
-	VideoGame game = new VideoGame { Name = "New Game" };
+	VideoGame game = new VideoGame { Name = "" };
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -45,6 +49,12 @@ else
 				game = result;
 			}
 		}
+	}
+
+	async Task DeleteVideoGame()
+	{
+		await Http.DeleteAsync($"api/videogame/{Id}");
+		Navigation.NavigateTo("/videogames");
 	}
 
 	async Task HandleSubmit()

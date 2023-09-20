@@ -62,5 +62,20 @@ namespace SimpleVideoGameLibrary.Server.Controllers
 
 			return await GetAllVideoGames();
 		}
+
+		[HttpDelete("{id}")]
+		public async Task<ActionResult<List<VideoGame>>> DeleteVideoGame(int id)
+		{
+			var dbGame = await _context.VideoGames.FindAsync(id);
+			if (dbGame == null)
+			{
+				return NotFound("This video game doesn't exist!");
+			}
+
+			_context.VideoGames.Remove(dbGame);
+			await _context.SaveChangesAsync();
+
+			return await GetAllVideoGames();
+		}
 	}
 }
