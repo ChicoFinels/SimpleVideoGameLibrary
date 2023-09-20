@@ -1,10 +1,11 @@
 ﻿@page "/videogames"
+@inject HttpClient Http
 
 <h3>Video Games</h3>
 
 @if (games.Count <= 0)
 {
-	<span>Loading Video Games</span>
+	<span>Loading Video Games...</span>
 }
 else
 {
@@ -19,4 +20,12 @@ else
 
 @code {
 	List<VideoGame> games = new List<VideoGame>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		var result = await Http.GetFromJsonAsync<List<VideoGame>>("api/videogame");
+
+		if (result != null)
+			games = result;
+	}
 }
