@@ -1,0 +1,22 @@
+﻿@page "/videogames"
+
+<h3>Video Games</h3>
+
+@if (games.Count <= 0)
+{
+	<span>Loading Video Games</span>
+}
+else
+{
+	<ul>
+		@foreach (var game in games)
+		{
+			<li>@game.Name - @game.Publisher - @game.ReleaseYear</li>
+		}
+	</ul>
+}
+
+
+@code {
+	List<VideoGame> games = new List<VideoGame>();
+}
