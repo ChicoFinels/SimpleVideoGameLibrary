@@ -3,8 +3,8 @@
 
 @if (Id is null)
 {
-	<PageTitle>Create a New Video Game</PageTitle>
-	<h3>Create a New Video Game</h3>
+	<PageTitle>Add a New Video Game</PageTitle>
+	<h3>Add a New Video Game</h3>
 }
 else
 {
@@ -24,7 +24,7 @@ else
 	<div>
 		<label for="releaseYear">Release Year</label>
 		<InputNumber id="releaseYear" @bind-Value="game.ReleaseYear" class="form-control" />
-	</div>
+	</div><br />
 	<button type="submit" class="btn btn-primary">Save</button>
 </EditForm>
 
